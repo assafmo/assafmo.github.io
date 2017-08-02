@@ -16,7 +16,7 @@
 title: Assaf Morami
 email: assaf.morami@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  A random collection of thoughts and things I have learned over time. :-)
+  Random collection of thoughts and things I have learned over time. :-)
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  assafmo
@@ -26,7 +26,6 @@ markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
-
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
