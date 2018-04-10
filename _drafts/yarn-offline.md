@@ -40,6 +40,8 @@ yarn add <dep1> [<dep2>...]
 
 Then copy `new-project/yarn.lock`, `new-project/package.json` and `~/yarn-offline-mirror/` to the offline machine.
 
+(`rm -rf new-project/` is ok now.)
+
 #### On the offline machine:
 
 ```bash
@@ -50,10 +52,55 @@ cd new-project/
 yarn --offline
 ```
 
-### Adding a package to an existing project
+### Adding packages to an existing project
+
+#### On the internet machine:
+
+```bash
+mkdir new-packages/
+cd new-packages/
+yarn add <dep1> [<dep2>...]
+```
+
+Then copy `new-packages/yarn.lock`, `new-packages/package.json` and `~/yarn-offline-mirror/` to the offline machine.
+
+#### On the offline machine:
+
+1.  Append the imported `yarn.lock` to the existing `yarn.lock`. I found that without this step Yarn sometimes fails to find the new packages in the offline cache:
+
+    ```bash
+    cat /path/to/imported/yarn.lock >> existing-project/yarn.lock
+    ```
+
+2.  Update `package.json` with the new dependencies. This means merging both `dependencies` fields together. An ugly one-liner I tend to use:
+
+    ```bash
+    cat existing-project/package.json <(cat existing-project/package.json /path/to/imported/package.json | jq '.dependencies' | jq -s 'add | {dependencies: .}') | jq -s add | sponge existing-project/package.json
+    ```
+
+3.  Update `yarn-offline-mirror`:
+
+    ```bash
+    cp -n /path/to/imported/yarn-offline-mirror/* ~/yarn-offline-mirror/
+    ```
+
+4.  Install the new packages. This step also fixes `existing-project/yarn.lock`.
+
+    ```bash
+    cd existing-project/
+    yarn --offline
+    ```
+
+I found the if I skip steps 1 and 2, and in step 4 I do `yarn add --offline <dep1> [<dep2>...]` then Yarn might not find the new packages in the cache and fail. This bug still exists in version 1.5.1. I believe it is related to these GitHub issues: [[1]](yarn-offline-issue-1)[[2]](yarn-offline-issue-2)[[3]](yarn-offline-issue-3)[[4]](yarn-offline-issue-4)[[5]](yarn-offline-issue-5)[[6]](yarn-offline-issue-6)
 
 ### Installing global packages
 
 [npmbox-link]: https://github.com/arei/npmbox
 [unnpmbox-issue]: https://github.com/arei/npmbox/issues/61
 [yarn-original-blogpost]: https://yarnpkg.com/blog/2016/11/24/offline-mirror/
+[yarn-offline-issue-1]: https://github.com/yarnpkg/yarn/issues/5454
+[yarn-offline-issue-2]: https://github.com/yarnpkg/yarn/issues/5339
+[yarn-offline-issue-3]: https://github.com/yarnpkg/yarn/issues/731
+[yarn-offline-issue-4]: https://github.com/yarnpkg/yarn/issues/4909
+[yarn-offline-issue-5]: https://github.com/yarnpkg/yarn/issues/4266
+[yarn-offline-issue-6]: https://github.com/yarnpkg/yarn/issues/4899
