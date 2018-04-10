@@ -26,7 +26,7 @@ yarn config set yarn-offline-mirror ~/yarn-offline-mirror/
 yarn config set yarn-offline-mirror ~/yarn-offline-mirror/
 ```
 
-Note: On the offline machine, `~/yarn-offline-mirror/` can also be a shared folder or a git repository.
+Note: On the offline machine `~/yarn-offline-mirror/` can also be a shared folder or a git repository.
 
 ### Creating a new project
 
