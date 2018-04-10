@@ -6,11 +6,11 @@ date: 2018-04-10
 
 NPM is horrible installing packages in an offline environment. Multiple times I found myself `npm install`ing on an internet machine just to copy `node_modules` to the offline environment and commit it with the entire project.
 
-For a while [npmbox](npmbox-link) worked for me, but issues like [trying to reach the internet](unnpmbox-issue) would randomly appear and cripple my workflow.
+For a while [npmbox][npmbox-link] worked for me, but issues like [trying to reach the internet][unnpmbox-issue] would randomly appear and cripple my workflow.
 
 ### Enter Yarn
 
-With Yarn I'm able to consistently install packages in an offline environment. Their [original blogpost](yarn-original-blogpost) is helpful, but I encountered some edge case it doesn't cover. So this is my process for using Yarn in an offline environment.
+With Yarn I'm able to consistently install packages in an offline environment. Their [original blogpost][yarn-original-blogpost] is helpful, but I encountered some edge case it doesn't cover. So this is my process for using Yarn in an offline environment.
 
 ### Set yarn-offline-mirror
 
@@ -75,7 +75,7 @@ Then copy `new-packages/yarn.lock`, `new-packages/package.json` and `~/yarn-offl
 2.  Update `package.json` with the new dependencies. This means merging both `dependencies` fields together. An ugly one-liner I tend to use:
 
     ```bash
-    cat existing-project/package.json <(cat existing-project/package.json /path/to/imported/package.json | jq '.dependencies' | jq -s 'add | {dependencies: .}') | jq -s add | sponge existing-project/package.json
+    cat existing-project/package.json <(cat existing-project/package.json /path/to/imported/package.json | jq '.dependencies' | jq -s 'add | {dependencies: .}'] | jq -s add | sponge existing-project/package.json
     ```
 
 3.  Update `yarn-offline-mirror`:
@@ -91,7 +91,7 @@ Then copy `new-packages/yarn.lock`, `new-packages/package.json` and `~/yarn-offl
     yarn --offline
     ```
 
-I found the if I skip steps 1 and 2, and in step 4 I do `yarn add --offline <dep1> [<dep2>...]` then Yarn might not find the new packages in the cache and fail. This bug still exists in version 1.5.1. I believe it is related to these GitHub issues: [[1]](yarn-offline-issue-1)[[2]](yarn-offline-issue-2)[[3]](yarn-offline-issue-3)[[4]](yarn-offline-issue-4)[[5]](yarn-offline-issue-5)[[6]](yarn-offline-issue-6)
+I found the if I skip steps 1 and 2, and in step 4 I do `yarn add --offline <dep1> [<dep2>...]` then Yarn might not find the new packages in the cache and fail. This bug still exists in version 1.5.1. I believe it is related to these GitHub issues: [[1]][yarn-offline-issue-1][[2]][yarn-offline-issue-2][[3]][yarn-offline-issue-3][[4]][yarn-offline-issue-4][[5]][yarn-offline-issue-5][[6]][yarn-offline-issue-6]
 
 ### Installing global packages
 
