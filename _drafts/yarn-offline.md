@@ -12,7 +12,7 @@ I also tried [Sinopia][sinopia-docker-link], but couldn't consistently publish n
 
 ### Enter Yarn
 
-With Yarn I'm able to consistently install packages in an offline environment. Their [original blog post][yarn-original-blogpost] is helpful, but I encountered some edge case it doesn't cover.
+With Yarn I'm able to consistently install packages in an offline environment. Their [original blog post][yarn-original-blogpost] is helpful, but I met some edge case it doesn't cover.
 
 This is my process for using Yarn in an offline environment.
 
