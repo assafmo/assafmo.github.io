@@ -147,7 +147,7 @@ Yarn [discourages using global packages][yarn-no-global], so it's hard by design
 
 ### This is not a silver bullet
 
-There are probably more edge case I still haven't met. I wish the docs around `yarn.lock` were better, Because playing with it solved most of my problems.
+There are probably more edge case I still haven't met. I wish the docs around `yarn.lock` were better, Because playing with this file solved most of my problems.
 
 For example when adding packages to an existing project, I still don't understand why appending the new lock file to the existing one solves the resolution problem. According to the docs this step is unnecessary. And sometimes it is, but some other times it isn't.
 
