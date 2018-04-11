@@ -8,6 +8,8 @@ NPM is horrible installing packages in an offline environment. Multiple times I 
 
 For a while [npmbox][npmbox-link] worked for me, but issues like [trying to reach the internet][unnpmbox-issue] would randomly appear and cripple my workflow.
 
+I also tried [Sinopia][sinopia-docker-link], but couldn't consistently publish new or updated packages to it.
+
 ### Enter Yarn
 
 With Yarn I'm able to consistently install packages in an offline environment. Their [original blogpost][yarn-original-blogpost] is helpful, but I encountered some edge case it doesn't cover. So this is my process for using Yarn in an offline environment.
@@ -148,3 +150,4 @@ Yarn [discourages using global packages][yarn-no-global], so it's hard by design
 [yarn-offline-issue-6]: https://github.com/yarnpkg/yarn/issues/4899
 [yarn-no-global]: https://stackoverflow.com/a/43901681
 [yarn-global-location]: https://yarnpkg.com/lang/en/docs/cli/global/#defining-install-location
+[sinopia-docker-link]: https://hub.docker.com/r/keyvanfatehi/sinopia/
