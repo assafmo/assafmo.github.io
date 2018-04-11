@@ -12,7 +12,7 @@ For a while [npmbox][npmbox-link] worked for me, but issues like [trying to reac
 
 With Yarn I'm able to consistently install packages in an offline environment. Their [original blogpost][yarn-original-blogpost] is helpful, but I encountered some edge case it doesn't cover. So this is my process for using Yarn in an offline environment.
 
-### Set `yarn-offline-mirror`
+### Configuring `yarn-offline-mirror`
 
 #### On the internet machine:
 
