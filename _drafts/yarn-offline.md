@@ -12,7 +12,7 @@ For a while [npmbox][npmbox-link] worked for me, but issues like [trying to reac
 
 With Yarn I'm able to consistently install packages in an offline environment. Their [original blogpost][yarn-original-blogpost] is helpful, but I encountered some edge case it doesn't cover. So this is my process for using Yarn in an offline environment.
 
-### Set yarn-offline-mirror
+### Set `yarn-offline-mirror`
 
 #### On the internet machine:
 
@@ -20,7 +20,7 @@ With Yarn I'm able to consistently install packages in an offline environment. T
 yarn config set yarn-offline-mirror ~/yarn-offline-mirror/
 ```
 
-#### On my offline machine:
+#### On the offline machine:
 
 ```bash
 yarn config set yarn-offline-mirror ~/yarn-offline-mirror/
@@ -112,7 +112,30 @@ Yarn [discourages using global packages][yarn-no-global], so it's hard by design
     source ~/.bashrc # reload
     ```
 
-3.  Follow the instruction just like in [Creating a new project][#creating-a-new-project], but instead of `yarn --offline`
+3.  Similar to [Creating a new project](#creating-a-new-project), but with a few subtle differences:
+
+    #### On the internet machine:
+
+    ```bash
+    mkdir new-cli/
+    cd new-cli/
+    yarn add cli1@x.y.z [cli2...]
+    ```
+
+    Then copy `new-cli/yarn.lock` and `~/yarn-offline-mirror/` to the offline machine.
+
+    (`rm -rf new-cli/` is ok now.)
+
+    #### On the offline machine:
+
+    ```bash
+    cp /path/to/imported/yarn.lock .
+    cp -n /path/to/imported/yarn-offline-mirror/* ~/yarn-offline-mirror/
+    yarn global add --offline cli1@x.y.z [cli2...]
+    rm -f ./yarn.lock
+    ```
+
+    Note: In this context we don't care about `packge.json`. We only need to make sure that Yarn can find `yarn.lock` in the current directory and that `~/yarn-offline-mirror/` has the required dependencies.
 
 [npmbox-link]: https://github.com/arei/npmbox
 [unnpmbox-issue]: https://github.com/arei/npmbox/issues/61
