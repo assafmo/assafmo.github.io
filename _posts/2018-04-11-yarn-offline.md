@@ -79,7 +79,11 @@ Then copy `new-packages/yarn.lock`, `new-packages/package.json` and `~/yarn-offl
 2.  Update `package.json` with the new dependencies. This means merging both `dependencies` fields together. An ugly one-liner I tend to use:
 
     ```bash
-    cat existing-project/package.json <(cat existing-project/package.json /path/to/imported/package.json | jq '.dependencies' | jq -s 'add | {dependencies: .}') | jq -s add | sponge existing-project/package.json
+    cat existing-project/package.json <(cat existing-project/package.json /path/to/imported/package.json |
+            jq '.dependencies' |
+            jq -s 'add | {dependencies: .}') |
+        jq -s add |
+        sponge existing-project/package.json
     ```
 
 3.  Update `yarn-offline-mirror`:
