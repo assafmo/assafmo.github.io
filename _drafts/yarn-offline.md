@@ -4,7 +4,7 @@ title: Working offline with Yarn
 date: 2018-04-11
 ---
 
-NPM is horrible installing packages in an offline environment. Multiple times I found myself `npm install`ing on an internet machine just to copy `node_modules` to the offline environment and commit it with the entire project.
+NPM is not very friendly in an offline environment. Multiple times I found myself `npm install`ing on an internet machine just to copy `node_modules` to the offline environment and commit it with the entire project.
 
 For a while [npmbox][npmbox-link] worked for me, but issues like [trying to reach the internet][unnpmbox-issue] would randomly appear and cripple my workflow.
 
