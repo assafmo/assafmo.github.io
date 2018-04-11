@@ -8,7 +8,7 @@ NPM is not very friendly in an offline environment. Multiple times I found mysel
 
 For a while [npmbox][npmbox-link] worked for me, but issues like [trying to reach the internet][unnpmbox-issue] would randomly appear and cripple my workflow.
 
-I also tried [Sinopia][sinopia-docker-link], but couldn't consistently publish new or updated packages to it.
+I also tried [Sinopia][sinopia-link], but couldn't consistently publish new or updated packages to it.
 
 ### Enter Yarn
 
@@ -160,4 +160,4 @@ Overall I'm very satisfied with Yarn and I have a feeling it is only going to ge
 [yarn-offline-issue-6]: https://github.com/yarnpkg/yarn/issues/4899
 [yarn-no-global]: https://stackoverflow.com/a/43901681
 [yarn-global-location]: https://yarnpkg.com/lang/en/docs/cli/global/#defining-install-location
-[sinopia-docker-link]: https://hub.docker.com/r/keyvanfatehi/sinopia/
+[sinopia-link]: https://github.com/rlidwka/sinopia
