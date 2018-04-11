@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Working offline with Yarn
-date: 2018-04-10
+date: 2018-04-11
 ---
 
 NPM is horrible installing packages in an offline environment. Multiple times I found myself `npm install`ing on an internet machine just to copy `node_modules` to the offline environment and commit it with the entire project.
@@ -35,7 +35,7 @@ Note: On the offline machine `~/yarn-offline-mirror/` can also be a shared folde
 ```bash
 mkdir new-project/
 cd new-project/
-yarn add <dep1> [<dep2>...]
+yarn add dep1@x.y.z [dep2...]
 ```
 
 Then copy `new-project/yarn.lock`, `new-project/package.json` and `~/yarn-offline-mirror/` to the offline machine.
@@ -59,7 +59,7 @@ yarn --offline
 ```bash
 mkdir new-packages/
 cd new-packages/
-yarn add <dep1> [<dep2>...]
+yarn add dep1@x.y.z [dep2...]
 ```
 
 Then copy `new-packages/yarn.lock`, `new-packages/package.json` and `~/yarn-offline-mirror/` to the offline machine.
@@ -95,6 +95,25 @@ I found the if I skip steps 1 and 2, and in step 4 I do `yarn add --offline <dep
 
 ### Installing global packages
 
+Yarn [discourages using global packages][yarn-no-global], so it's hard by design to install them.
+
+1.  Find out where is the global installation location [[7]][yarn-global-location]:
+
+    ```bash
+    yarn global bin
+    ```
+
+    (Or set it with `yarn config set prefix <filepath>`)
+
+2.  Add it to your path. E.g.:
+
+    ```bash
+    echo 'export PATH=${PATH}:'"$(yarn global bin)" >> ~/.bashrc
+    source ~/.bashrc # reload
+    ```
+
+3.  Follow the instruction just like in [Creating a new project][#creating-a-new-project], but instead of `yarn --offline`
+
 [npmbox-link]: https://github.com/arei/npmbox
 [unnpmbox-issue]: https://github.com/arei/npmbox/issues/61
 [yarn-original-blogpost]: https://yarnpkg.com/blog/2016/11/24/offline-mirror/
@@ -104,3 +123,5 @@ I found the if I skip steps 1 and 2, and in step 4 I do `yarn add --offline <dep
 [yarn-offline-issue-4]: https://github.com/yarnpkg/yarn/issues/4909
 [yarn-offline-issue-5]: https://github.com/yarnpkg/yarn/issues/4266
 [yarn-offline-issue-6]: https://github.com/yarnpkg/yarn/issues/4899
+[yarn-no-global]: https://stackoverflow.com/a/43901681
+[yarn-global-location]: https://yarnpkg.com/lang/en/docs/cli/global/#defining-install-location
