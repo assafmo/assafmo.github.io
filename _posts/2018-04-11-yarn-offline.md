@@ -92,7 +92,7 @@ Then copy `new-packages/yarn.lock`, `new-packages/package.json` and `~/yarn-offl
     cp -n /path/to/imported/yarn-offline-mirror/* ~/yarn-offline-mirror/
     ```
 
-4.  Install the new packages. This step also fixes `existing-project/yarn.lock`.
+4.  Install the new packages. This step also fixes `existing-project/yarn.lock` after we messed with it in step 1.
 
     ```bash
     cd existing-project/
