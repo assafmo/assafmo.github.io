@@ -107,7 +107,7 @@ Yarn [discourages using global packages][yarn-no-global], so it's hard by design
     yarn global bin
     ```
 
-    (Or set it with `yarn config set prefix <filepath>`)
+    (Or set it with `yarn config set prefix <file_path>`)
 
 2.  Add it to your path. E.g.:
 
@@ -139,7 +139,7 @@ Yarn [discourages using global packages][yarn-no-global], so it's hard by design
     rm -f ./yarn.lock
     ```
 
-    Note: In this context we don't care about `packge.json`. We only need to make sure that Yarn can find `yarn.lock` in the current directory and that `~/yarn-offline-mirror/` has the required dependencies.
+    Note: In this context we don't care about `package.json`. We only need to make sure that Yarn can find `yarn.lock` in the current directory and that `~/yarn-offline-mirror/` has the required dependencies.
 
 [npmbox-link]: https://github.com/arei/npmbox
 [unnpmbox-issue]: https://github.com/arei/npmbox/issues/61
