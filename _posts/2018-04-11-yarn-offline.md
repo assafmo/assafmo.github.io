@@ -99,7 +99,7 @@ Then copy `new-packages/yarn.lock`, `new-packages/package.json` and `~/yarn-offl
     yarn --offline
     ```
 
-I found the if I skip steps 1 and 2, and in step 4 I do `yarn add --offline <dep1> [<dep2>...]` then Yarn might not find the new packages in the cache and fail. This bug still exists in version 1.5.1. I believe it is related to these GitHub issues: [[1]][yarn-offline-issue-1][[2]][yarn-offline-issue-2][[3]][yarn-offline-issue-3][[4]][yarn-offline-issue-4][[5]][yarn-offline-issue-5][[6]][yarn-offline-issue-6]
+I found the if I skip steps 1 and 2, and in step 4 I do `yarn add --offline <dep1> [<dep2>...]` then Yarn might not find the new packages in the cache and fail. This bug still exists in version 1.5.1. I believe it is related to these GitHub issues: [[1]][yarn-offline-issue-1][[2]][yarn-offline-issue-2][[3]][yarn-offline-issue-3][[4]][yarn-offline-issue-4][[5]][yarn-offline-issue-5][[6]][yarn-offline-issue-6].
 
 ### Installing packages globally
 
