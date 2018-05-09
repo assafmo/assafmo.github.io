@@ -1,0 +1,31 @@
+---
+layout: post
+title: Mounting partitions from a dd image
+date: 2018-05-09
+---
+
+When `x.dd` is a disk clone created with one of the `dd` commands, first we'll try to detect partitions:
+
+```bash
+$ fdisk -l x.dd
+Disk x.dd: 94.1 MiB, 98705408 bytes, 192784 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xfc23b344
+
+Device Boot Start    End Sectors  Size Id Type
+x.dd1          63  96389   96327   47M  7 HPFS/NTFS/exFAT
+x.dd2       96390 192779   96390 47.1M  7 HPFS/NTFS/exFAT
+```
+
+This means that our `x.dd` image has two partitions, both NFTS. The offset of the first partition is 63 units, and the offset of the second partitions is 96,390 units. Each unit is of size 512 bytes.
+
+In order to mount those partitions, we'll use the `mount` command with the `offset` option:
+
+```bash
+mkdir partition_1 partition_2
+mount -t -o ro,offset=$((512*63)) x.dd partition_1
+mount -t -o ro,offset=$((512*96390)) x.dd partition_2
+```
