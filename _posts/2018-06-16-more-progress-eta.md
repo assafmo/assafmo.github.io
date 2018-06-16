@@ -48,6 +48,8 @@ total 3.0G
 1.16GiB 0:00:04 [ 275MiB/s] [============>                    ] 38% ETA 0:00:06
 ```
 
+_Note: `du -bc *pcap | tail -1 | cut -f 1` gives us an approximation for the size `merged.pcap`. It is good enough, as pv won't crash if the data is bigger or smaller than this._
+
 ### Using `parallel --bar` to count done jobs
 
 Finally, GNU parallel can print how many jobs are done and an ETA with the `--bar` flag.
