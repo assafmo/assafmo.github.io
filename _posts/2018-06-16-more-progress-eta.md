@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Some more progress and ETA tricks
+description: Some more progress and ETA tricks using the pv linux command and GNU parallel
+author: Assaf Morami
 date: 2018-06-16
 ---
 

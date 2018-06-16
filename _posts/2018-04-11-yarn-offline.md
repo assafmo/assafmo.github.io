@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Working offline with Yarn
+description: How to work in an offline environment with Node.JS and Yarn, Fackbook's replacment for the Node Package Manager (NPM) 
+author: Assaf Morami
 date: 2018-04-11
 ---
 
