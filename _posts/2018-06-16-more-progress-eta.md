@@ -52,7 +52,7 @@ total 3.0G
 
 Finally, GNU parallel can print how many jobs are done and an ETA with the `--bar` flag.
 
-For example, couting packets in multiple pcaps:
+For example, counting packets in multiple pcaps:
 
 ```bash
 ➜  ls *pcap | parallel --bar 'tcpdump -r "{}" -qn | wc -l > "{}".count'
