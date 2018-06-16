@@ -6,9 +6,9 @@ date: 2018-06-16
 
 In an [earlier post](https://assafmo.github.io/2017/08/02/pv-eta.html) I wrote about `pv -d`. Here are some more tricks that can be even easier to use.
 
-### Reading to stdout with `pv` instead of `cat`
+### Reading to stdout with pv instead of cat
 
-Reading files to stdout can be done with `pv` instead of `cat`. `pv` will also print transfer rate, ETA and a progress bar to stderr.
+Reading files to stdout can be done with pv instead of cat. pv will also print transfer rate, ETA and a progress bar to stderr.
 
 For example, counting packets in a pcap file:
 
@@ -16,7 +16,7 @@ For example, counting packets in a pcap file:
 ➜  ls -lh
 total 1.0G
 -rw-rw-r-- 1 assafmo assafmo 1.0G Jun 10 20:51 my.pcap
-➜  pv my.pcap| tcpdump -r /dev/stdin -qn | wc -l
+➜  pv my.pcap | tcpdump -r /dev/stdin -qn | wc -l
 reading from file /dev/stdin, link-type EN10MB (Ethernet)
 512MiB 0:00:10 [26.3MiB/s] [================>                 ] 50% ETA 0:00:09
 ```
@@ -24,7 +24,7 @@ reading from file /dev/stdin, link-type EN10MB (Ethernet)
 Result:
 
 ```bash
-➜  pv my.pcap| tcpdump -r /dev/stdin -qn | wc -l
+➜  pv my.pcap | tcpdump -r /dev/stdin -qn | wc -l
 reading from file /dev/stdin, link-type EN10MB (Ethernet)
 1023MiB 0:00:19 [44.8MiB/s] [================================>] 100%
 8635943
@@ -32,9 +32,9 @@ reading from file /dev/stdin, link-type EN10MB (Ethernet)
 
 ### Using `pv -s` in between pipes
 
-Placing `pv` in between pipes will make it read from stdin and print to stdout (just like `cat`), and also print the transfer rate to stderr.
+Placing pv in between pipes will make it read from stdin and print to stdout (just like cat), and also print the transfer rate to stderr.
 
-By using the `-s` flag we can tell `pv` the total size of the data being transferred, thus `pv` can also print progress and ETA to stderr.
+By using the `-s` flag we can tell pv the total size of the data being transferred, thus pv will also print progress and ETA to stderr.
 
 For example, merging multiple pcap files together:
 
@@ -50,7 +50,7 @@ total 3.0G
 
 ### `parallel --bar`
 
-Finally, GNU parallel has can print how many items are done and ETA with the `--bar` flag.
+Finally, GNU parallel can print how many items are done and an ETA with the `--bar` flag.
 
 For example, couting packets in multiple pcaps:
 
