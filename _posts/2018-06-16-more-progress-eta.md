@@ -44,17 +44,17 @@ total 3.0G
 -rw-rw-r-- 1 assafmo assafmo 1.0G Jun 10 20:51 1.pcap
 -rw-rw-r-- 1 assafmo assafmo 1.0G Jun 10 20:51 2.pcap
 -rw-rw-r-- 1 assafmo assafmo 1.0G Jun 10 20:51 my.pcap
-➜  joincap *.pcap | pv -s $(du -bc *pcap | tail -1 | awk '{print $1}') > merged.pcap
+➜  joincap *.pcap | pv -s $(du -bc *pcap | tail -1 | cut -f 1) > merged.pcap
 1.16GiB 0:00:04 [ 275MiB/s] [============>                    ] 38% ETA 0:00:06
 ```
 
-### `parallel --bar`
+### Using `parallel --bar` to count done jobs
 
-Finally, GNU parallel can print how many items are done and an ETA with the `--bar` flag.
+Finally, GNU parallel can print how many jobs are done and an ETA with the `--bar` flag.
 
 For example, couting packets in multiple pcaps:
 
 ```bash
-➜  ls *pcap | parallel --bar 'tcpdump -r {} -qn 2>/dev/null | wc -l > {}.count'
+➜  ls *pcap | parallel --bar 'tcpdump -r "{}" -qn | wc -l > "{}".count'
 66% 2:1=1s my.pcap
 ```
