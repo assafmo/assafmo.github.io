@@ -50,7 +50,7 @@ total 3.0G
 1.16GiB 0:00:04 [ 275MiB/s] [============>                    ] 38% ETA 0:00:06
 ```
 
-_Note: `du -bc *pcap | tail -1 | cut -f 1` gives us an approximation for the size of `merged.pcap`. This good enough, as `pv -s` won't crash if the data is bigger or smaller than this._
+_Note: `du -bc *pcap | tail -1 | cut -f 1` gives us an approximation for the size of `merged.pcap`. This is good enough, as `pv -s` won't crash if the data is bigger or smaller, it'll just be wrong (exit before or go over 100%)._
 
 ### Using `parallel --bar` to count done jobs
 
