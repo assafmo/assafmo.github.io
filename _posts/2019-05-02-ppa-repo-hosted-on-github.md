@@ -1,16 +1,16 @@
 ---
 layout: post
-title: Creating your own PPA repository and host it on GitHub
-description: How to create a Ubuntu and Debian PPA repository and to host it on GitHub
+title: Host your own PPA repository on GitHub
+description: How to create a Ubuntu and Debian PPA repository and host it on GitHub
 author: Assaf Morami
 date: 2019-05-02
 ---
 
-Publishing your own Debian packages and hosting it on a GitHub repo is pretty easy. This is a quick howto.
+Publishing your own Debian packages and hosting it on a GitHub repo is pretty easy. This is a quick HowTo.
 
-### A repo can be as simple as one directory
+### A PPA repo can be as simple as one directory
 
-```bash
+```
 .
 └── my_ppa
     ├── my_list_file.list
@@ -28,8 +28,10 @@ Publishing your own Debian packages and hosting it on a GitHub repo is pretty ea
     └── package-z_1.0.0_amd64.deb
 ```
 
+A working example can be seen in [https://github.com/assafmo/ppa](https://github.com/assafmo/ppa).
+
 You can name `my_ppa` and `my_list_file.list` whatever you like. I used those names because it's hard to name things.  
-Also don't forget to replace `${GITHUB_USERNAME}` with your GitHub user name.
+Also don't forget to replace `${GITHUB_USERNAME}` with your GitHub user name and `${EMAIL}` with your email address.
 
 ### 0. Creating a GitHub repo with your deb packages
 
@@ -42,14 +44,12 @@ Now clone the repo and put all of your debian packages inside:
 ```bash
 git clone git@github.com:"${GITHUB_USERNAME}"/my_ppa.git
 cd my_ppa
-cp /path/to/my/package_0.0.1_amd64.deb .
+cp /path/to/my/package-a_0.0.1_amd64.deb .
 ```
-
-(StackOverflow: [What is the simplest Debian Packaging Guide?](https://askubuntu.com/questions/1345/what-is-the-simplest-debian-packaging-guide))
 
 ### 1. Creating a GPG key
 
-Install gpg and create a new key:
+Install `gpg` and create a new key:
 
 ```bash
 sudo apt install gnupg
@@ -92,7 +92,7 @@ Enter your name and email:
 
 ```
 Real name: My Name
-Email address: my.name@email.com
+Email address: ${EMAIL}
 Comment:
 You selected this USER-ID:
 "My Name <my.name@email.com>"
@@ -122,15 +122,27 @@ uid My Name <my.name@email.com>
 sub rsa4096 2019-05-01 [E]
 ```
 
-### 2. Creating the `KEY.gpg` file
-
-Lets create the ASCII public key file `KEY.gpg` inside the git repo `my_ppa`:
+You can backup your private key using:
 
 ```bash
-gpg --armor --export my.name@email.com > /path/to/my_ppa/KEY.gpg
+gpg --export-secret-keys "${EMAIL}" > my-private-key.asc
 ```
 
-Note: The private key is referenced by the email address.
+And import it using:
+
+```bash
+gpg --import my-private-key.asc
+```
+
+### 2. Creating the `KEY.gpg` file
+
+Create the ASCII public key file `KEY.gpg` inside the git repo `my_ppa`:
+
+```bash
+gpg --armor --export "${EMAIL}" > /path/to/my_ppa/KEY.gpg
+```
+
+Note: The private key is referenced by the email address you entered in the previous step.
 
 ### 3. Creating the `Packages` and `Packages.gz` files
 
@@ -147,8 +159,8 @@ Inside the git repo `my_ppa`:
 
 ```bash
 apt-ftparchive release . > Release
-gpg --default-key my.name@email.com -abs -o - Release > Release.gpg
-gpg --default-key my.name@email.com --clearsign -o - Release > InRelease
+gpg --default-key "${EMAIL}" -abs -o - Release > Release.gpg
+gpg --default-key "${EMAIL}" --clearsign -o - Release > InRelease
 ```
 
 ### 5. Creating the `my_list_file.list` file
@@ -159,13 +171,16 @@ Inside the git repo `my_ppa`:
 echo "deb https://${GITHUB_USERNAME}.github.io/my_ppa ./" > my_list_file.list
 ```
 
+This file will be installed later on in the user's `/etc/apt/sources.list.d/` directory. This tells `apt` to look for updates from your PPA in `https://${GITHUB_USERNAME}.github.io/my_ppa`.
+
 ### That's it!
 
-Commit and push to GitHub and you are ready to go:
+Commit and push to GitHub and your PPA is ready to go:
 
 ```bash
 git add -A
 git commit -m 'my ppa repo hosted on github'
+git push -u origin master
 ```
 
 Now you can tell all your friends and users to install your PPA this way:
@@ -176,10 +191,40 @@ sudo curl -s --compressed -o /etc/apt/sources.list.d/my_list_file.list "https://
 sudo apt update
 ```
 
-Then they can install your package:
+Then they can install your packages:
 
 ```bash
-sudo apt install package-a
+sudo apt install package-a package-b package-z
 ```
 
-When you'll publish a new version for an old package
+Whenever you'll publish a new version for an existing package your users will get it just like any other update.
+
+### How to add new packages
+
+Just put your new `.deb` files inside the `my_ppa` and run:
+
+```bash
+# Packages & Packages.gz
+dpkg-scanpackages . > Packages
+gzip -k -f Packages
+
+# Release, Release.gpg & InRelease
+apt-ftparchive release . > Release
+gpg --default-key "${EMAIL}" -abs -o - Release > Release.gpg
+gpg --default-key "${EMAIL}" --clearsign -o - Release > InRelease
+
+# Commit & push
+git add -A
+git commit -m update
+git push
+```
+
+### Sources
+
+- [Export and import a GPG key](https://makandracards.com/makandra/37763-gpg-extract-private-key-and-import-on-different-machine)
+- [Creating your own Signed APT Repository and Debian Packages
+  ](http://blog.jonliv.es/blog/2011/04/26/creating-your-own-signed-apt-repository-and-debian-packages/)
+- [Create your own custom and authenticated APT repository
+  ](https://medium.com/sqooba/create-your-own-custom-and-authenticated-apt-repository-1e4a4cf0b864)
+- [A vscode ppa example by @tagplus5](https://github.com/tagplus5/vscode-ppa)
+- [What is the simplest Debian Packaging Guide?](https://askubuntu.com/questions/1345/what-is-the-simplest-debian-packaging-guide)
