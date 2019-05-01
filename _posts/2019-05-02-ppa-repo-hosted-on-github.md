@@ -30,7 +30,8 @@ Publishing your own Debian packages and hosting it on a GitHub repo is pretty ea
 
 A working example can be seen in [https://github.com/assafmo/ppa](https://github.com/assafmo/ppa).
 
-You can name `my_ppa` and `my_list_file.list` whatever you like. I used those names because it's hard to name things.  
+You can name `my_ppa` and `my_list_file.list` whatever you like. I used those names because it's hard to name things.
+
 Also don't forget to replace `${GITHUB_USERNAME}` with your GitHub user name and `${EMAIL}` with your email address.
 
 ### 0. Creating a GitHub repo with your deb packages
