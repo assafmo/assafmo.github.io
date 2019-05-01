@@ -36,7 +36,7 @@ Also don't forget to replace `${GITHUB_USERNAME}` with your GitHub user name and
 
 ### 0. Creating a GitHub repo with your deb packages
 
-[Create a GitHub repo](https://github.com/new). Lets call it `my_ppa`. Then go to `https://github.com/${GITHUB_USERNAME}/my_ppa/settings`, and under `GitHub Pages` select `Source` to be `master branch`.
+[Create a GitHub repo](https://github.com/new). We'll call it `my_ppa`. Then go to `https://github.com/${GITHUB_USERNAME}/my_ppa/settings`, and under `GitHub Pages` select `Source` to be `master branch`.
 
 Any HTTP server will work just fine, but GitHub pages is free, easy and fast.
 
