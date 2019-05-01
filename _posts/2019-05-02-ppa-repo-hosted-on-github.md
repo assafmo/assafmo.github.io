@@ -202,7 +202,7 @@ Whenever you'll publish a new version for an existing package your users will ge
 
 ### How to add new packages
 
-Just put your new `.deb` files inside the git repo `my_ppa` and run:
+Just put your new `.deb` files inside the git repo `my_ppa` and execute:
 
 ```bash
 # Packages & Packages.gz
