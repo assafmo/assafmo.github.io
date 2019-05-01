@@ -180,7 +180,7 @@ Commit and push to GitHub and your PPA is ready to go:
 
 ```bash
 git add -A
-git commit -m 'my ppa repo hosted on github'
+git commit -m 'my ppa repo in now hosted on github'
 git push -u origin master
 ```
 
