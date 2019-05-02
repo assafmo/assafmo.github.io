@@ -28,7 +28,7 @@ Publishing your own Debian packages and hosting it on a GitHub repo is pretty ea
     └── package-z_1.0.0_amd64.deb
 ```
 
-A working example can be seen in [https://github.com/assafmo/ppa](https://github.com/assafmo/ppa).
+A working example can be found in [https://github.com/assafmo/ppa](https://github.com/assafmo/ppa).
 
 You can name `my_ppa` and `my_list_file.list` whatever you like. I used those names because it's hard to name things.
 
@@ -43,7 +43,7 @@ Any HTTP server will work just fine, but GitHub pages is free, easy and fast.
 Now clone the repo and put all of your debian packages inside:
 
 ```bash
-git clone git@github.com:"${GITHUB_USERNAME}"/my_ppa.git
+git clone "git@github.com:${GITHUB_USERNAME}/my_ppa.git"
 cd my_ppa
 cp /path/to/my/package-a_0.0.1_amd64.deb .
 ```
