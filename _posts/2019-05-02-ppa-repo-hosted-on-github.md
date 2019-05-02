@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Host your own PPA repository on GitHub
+title: Hosting your own PPA repository on GitHub
 description: How to create a Ubuntu and Debian PPA repository and host it on GitHub
 author: Assaf Morami
 date: 2019-05-02
