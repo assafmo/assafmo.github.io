@@ -187,7 +187,7 @@ git push -u origin master
 Now you can tell all your friends and users to install your PPA this way:
 
 ```bash
-curl -s --compressed "https://${GITHUB_USERNAME}.github.io/ppa/ubuntu/KEY.gpg" | sudo apt-key add -
+curl -s --compressed "https://${GITHUB_USERNAME}.github.io/my_ppa/KEY.gpg" | sudo apt-key add -
 sudo curl -s --compressed -o /etc/apt/sources.list.d/my_list_file.list "https://${GITHUB_USERNAME}.github.io/my_ppa/my_list_file.list"
 sudo apt update
 ```
