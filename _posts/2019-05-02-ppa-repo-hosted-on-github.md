@@ -150,7 +150,7 @@ Note: The private key is referenced by the email address you entered in the prev
 Inside the git repo `my_ppa`:
 
 ```bash
-dpkg-scanpackages . > Packages
+dpkg-scanpackages --multiversion . > Packages
 gzip -k -f Packages
 ```
 
@@ -206,7 +206,7 @@ Just put your new `.deb` files inside the git repo `my_ppa` and execute:
 
 ```bash
 # Packages & Packages.gz
-dpkg-scanpackages . > Packages
+dpkg-scanpackages --multiversion . > Packages
 gzip -k -f Packages
 
 # Release, Release.gpg & InRelease
