@@ -198,7 +198,7 @@ Then they can install your packages:
 sudo apt install package-a package-b package-z
 ```
 
-Whenever you'll publish a new version for an existing package your users will get it just like any other update.
+Whenever you publish a new version for an existing package your users will get it just like any other update.
 
 ### How to add new packages
 
