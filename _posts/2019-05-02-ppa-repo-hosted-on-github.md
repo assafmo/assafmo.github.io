@@ -169,7 +169,7 @@ gpg --default-key "${EMAIL}" --clearsign -o - Release > InRelease
 Inside the git repo `my_ppa`:
 
 ```bash
-echo "deb https://${GITHUB_USERNAME}.github.io/my_ppa ./" > my_list_file.list
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/my_ppa.gpg] https://${GITHUB_USERNAME}.github.io/my_ppa ./" > my_list_file.list
 ```
 
 This file will be installed later on in the user's `/etc/apt/sources.list.d/` directory. This tells `apt` to look for updates from your PPA in `https://${GITHUB_USERNAME}.github.io/my_ppa`.
@@ -187,7 +187,7 @@ git push -u origin master
 Now you can tell all your friends and users to install your PPA this way:
 
 ```bash
-curl -s --compressed "https://${GITHUB_USERNAME}.github.io/my_ppa/KEY.gpg" | sudo apt-key add -
+curl -s --compressed "https://${GITHUB_USERNAME}.github.io/my_ppa/KEY.gpg" | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/my_ppa.gpg >/dev/null
 sudo curl -s --compressed -o /etc/apt/sources.list.d/my_list_file.list "https://${GITHUB_USERNAME}.github.io/my_ppa/my_list_file.list"
 sudo apt update
 ```
